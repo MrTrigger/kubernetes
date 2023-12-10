@@ -1,0 +1,25 @@
+---
+kubernetes:
+  children:
+    master:
+      hosts:
+        k3s-master-1:
+          ansible_user: magnus
+          ansible_host: 192.168.1.120
+        k3s-master-2:
+          ansible_user: magnus
+          ansible_host: 192.168.1.121
+        k3s-master-3:
+          ansible_user: magnus
+          ansible_host: 192.168.1.122
+    worker:
+      hosts:
+        k3s-worker-1:
+          ansible_user: magnus
+          ansible_host: 192.168.1.123
+        k3s-worker-2:
+          ansible_user: magnus
+          ansible_host: 192.168.1.124
+        k3s-worker-3:
+          ansible_user: magnus
+          ansible_host: 192.168.1.125
