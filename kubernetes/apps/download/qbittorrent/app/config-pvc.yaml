@@ -9,10 +9,6 @@ spec:
     - ReadWriteOnce
   storageClassName: tank-nfs
   volumeName: qbittorrent-config-pv
-  securityContext:
-    runAsUser: 1001
-    runAsGroup: 1002
-    #fsGroup: 2000
   resources:
     requests:
       storage: 100Mi

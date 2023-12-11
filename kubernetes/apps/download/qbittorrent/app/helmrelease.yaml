@@ -5,6 +5,10 @@ metadata:
   name: qbittorrent
   namespace: download
 spec:
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 1002
+    #fsGroup: 2000
   interval: 10m
   chart:
     spec:
