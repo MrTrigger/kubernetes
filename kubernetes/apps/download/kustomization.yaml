@@ -6,6 +6,3 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./qbittorrent/ks.yaml
-  - ./media-pvc.yaml
-  - ./storage-pvc.yaml
-  - ./appdata-pvc.yaml
