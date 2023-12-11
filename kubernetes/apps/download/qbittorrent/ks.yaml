@@ -5,7 +5,7 @@ metadata:
   name: &app qbittorrent
   namespace: download
 spec:
-  targetNamespace: download-gateway
+  targetNamespace: download
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
