@@ -24,6 +24,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: download-gateway
+      namespace: download
   values:
     controllers:
       main:
@@ -71,7 +74,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: qbittorrent-config
+        existingClaim: qbittorrent-config-pvc
       media:
         enabled: true
         type: nfs
