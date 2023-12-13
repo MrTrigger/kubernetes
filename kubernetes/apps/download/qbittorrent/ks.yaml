@@ -5,7 +5,7 @@ metadata:
   name: &app qbittorrent
   namespace: flux-system
 spec:
-  targetNamespace: vpn
+  targetNamespace: download
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
