@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
+  - ./namespace2.yaml
   # Flux-Kustomizations
   - ./download-gateway/ks.yaml
   - ./qbittorrent/ks.yaml
