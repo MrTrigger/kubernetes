@@ -106,7 +106,7 @@ spec:
     DNS: "10.45.0.1"
     settings:
       # see default configuration in the logs of the routes container of the pod-gateway
-      VPN_INTERFACE: wg0
+      VPN_INTERFACE: tun0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_TRAFFIC_PORT: "51820"
       # DNS_LOCAL_CIDRS: "local"
