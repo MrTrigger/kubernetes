@@ -122,13 +122,13 @@ spec:
             port: 50413
           - type: udp
             port: 50413
-    webhook:
-      image:
-        repository: ghcr.io/angelnu/gateway-admision-controller
-        tag: v3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
-      gatewayDefault: false
-      gatewayLabel: setGateway
-      gatewayAnnotation: setGateway
+    # webhook:
+    #   image:
+    #     repository: ghcr.io/angelnu/gateway-admision-controller
+    #     tag: v3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
+    #   gatewayDefault: false
+    #   gatewayLabel: setGateway
+    #   gatewayAnnotation: setGateway
 
     # podAnnotations:
     #   configmap.reloader.stakater.com/reload: download-gateway-pod-gateway,download-gateway-pod-gateway-addon-vpn
