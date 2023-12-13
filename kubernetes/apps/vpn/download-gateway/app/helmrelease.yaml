@@ -103,7 +103,7 @@ spec:
                     cidr: ${SERVICE_CIDR}
     routed_namespaces:
       - download
-    DNS: ${POD_GATEWAY_VPN_VXLAN}.1
+    DNS: "10.45.0.1"
     settings:
       # see default configuration in the logs of the routes container of the pod-gateway
       VPN_INTERFACE: wg0
@@ -111,9 +111,9 @@ spec:
       VPN_TRAFFIC_PORT: "51820"
       # DNS_LOCAL_CIDRS: "local"
       NOT_ROUTED_TO_GATEWAY_CIDRS: ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
-      VPN_LOCAL_CIDRS: ${POD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
+      VPN_LOCAL_CIDRS: "10.45.0.0/24" ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
       IPTABLES_NFT: "yes"
-      VXLAN_IP_NETWORK: ${POD_GATEWAY_VPN_VXLAN}
+      VXLAN_IP_NETWORK: "10.45.0"
     publicPorts:
       - hostname: qbittorrent
         IP: 10
