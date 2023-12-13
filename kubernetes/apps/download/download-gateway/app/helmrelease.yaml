@@ -103,7 +103,7 @@ spec:
                     cidr: ${SERVICE_CIDR}
     routed_namespaces:
       - download
-    DNS: "10.45.0.1"
+    DNS: 10.45.0.1
     settings:
       # see default configuration in the logs of the routes container of the pod-gateway
       VPN_INTERFACE: tun0
