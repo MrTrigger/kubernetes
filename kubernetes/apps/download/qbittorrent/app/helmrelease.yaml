@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: download-gateway
-      namespace: vpn
+      namespace: download
   values:
     controllers:
       main:
@@ -69,7 +69,6 @@ spec:
         tls:
           - hosts:
               - *host
-
     persistence:
       config:
         enabled: true
