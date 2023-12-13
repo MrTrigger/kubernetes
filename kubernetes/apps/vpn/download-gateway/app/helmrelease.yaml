@@ -37,81 +37,83 @@ spec:
       #       memory: 10M
       #     limits:
       #       memory: 10M
-      # vpn:
-      #   enabled: true
-      #   type: gluetun
-      #   gluetun:
-      #     image:
-      #       repository: ghcr.io/qdm12/gluetun
-      #       tag: v3.36.0@sha256:011bea4f0743864d4eda5a569217a6fe18e3a52f5d6df31b4ceb9f7763bfbf6b
-      #   env:
-      #     - name: VPN_TYPE
-      #       value: wireguard
-      #     - name: VPN_SERVICE_PROVIDER
-      #       value: nordvpn
-      #     - name: VPN_INTERFACE
-      #       value: wg0
-      #     - name: FIREWALL
-      #       value: "off"
-      #     - name: DOT
-      #       value: "off"
-      #     - name: LOG_LEVEL
-      #       value: debug
-      #     - name: WIREGUARD_PRIVATE_KEY
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: download-gateway-secret
-      #           key: WIREGUARD_PRIVATE_KEY
-      #     - name: SERVER_COUNTRIES
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: download-gateway-secret
-      #           key: SERVER_COUNTRIES
-      #     - name: SERVER_REGIONS
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: download-gateway-secret
-      #           key: SERVER_REGIONS
-      #     - name: SERVER_HOSTNAMES
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: download-gateway-secret
-      #           key: SERVER_HOSTNAMES
-      #   resources:
-      #     requests:
-      #       cpu: 5m
-      #       memory: 128M
-      #     limits:
-      #       memory: 128M
-      #   securityContext:
-      #     capabilities:
-      #       add:
-      #         - NET_ADMIN
-      #   networkPolicy:
-      #     enabled: true
-      #     egress:
-      #       - to:
-      #           - ipBlock:
-      #               cidr: 0.0.0.0/0
-      #         ports:
-      #           - port: 51820
-      #             protocol: UDP
-      #       - to:
-      #           - ipBlock:
-      #               cidr: ${CLUSTER_CIDR}
-      #           - ipBlock:
-      #               cidr: ${SERVICE_CIDR}
+      vpn:
+        enabled: true
+        type: gluetun
+        gluetun:
+          image:
+            repository: ghcr.io/qdm12/gluetun
+            tag: v3.36.0@sha256:011bea4f0743864d4eda5a569217a6fe18e3a52f5d6df31b4ceb9f7763bfbf6b
+        env:
+          - name: VPN_TYPE
+            value: wireguard
+          - name: VPN_SERVICE_PROVIDER
+            value: nordvpn
+          - name: VPN_INTERFACE
+            value: wg0
+          - name: FIREWALL
+            value: "off"
+          - name: DOT
+            value: "off"
+          - name: LOG_LEVEL
+            value: debug
+          - name: WIREGUARD_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: download-gateway-secret
+                key: WIREGUARD_PRIVATE_KEY
+          - name: SERVER_COUNTRIES
+            valueFrom:
+              secretKeyRef:
+                name: download-gateway-secret
+                key: SERVER_COUNTRIES
+          - name: SERVER_REGIONS
+            valueFrom:
+              secretKeyRef:
+                name: download-gateway-secret
+                key: SERVER_REGIONS
+          - name: SERVER_HOSTNAMES
+            valueFrom:
+              secretKeyRef:
+                name: download-gateway-secret
+                key: SERVER_HOSTNAMES
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128M
+          limits:
+            memory: 128M
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        networkPolicy:
+          enabled: true
+          egress:
+            - to:
+                - ipBlock:
+                    cidr: 0.0.0.0/0
+              ports:
+                - port: 51820
+                  protocol: UDP
+            - to:
+                - ipBlock:
+                    cidr: ${CLUSTER_CIDR}
+                - ipBlock:
+                    cidr: ${SERVICE_CIDR}
     routed_namespaces:
       - download
+    DNS: ${POD_GATEWAY_VPN_VXLAN}.1
     settings:
       # see default configuration in the logs of the routes container of the pod-gateway
       VPN_INTERFACE: wg0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_TRAFFIC_PORT: "51820"
-      DNS_LOCAL_CIDRS: "local"
+      # DNS_LOCAL_CIDRS: "local"
       NOT_ROUTED_TO_GATEWAY_CIDRS: ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
-      VPN_LOCAL_CIDRS: ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
+      VPN_LOCAL_CIDRS: ${POD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}
       IPTABLES_NFT: "yes"
+      VXLAN_IP_NETWORK: ${POD_GATEWAY_VPN_VXLAN}
     publicPorts:
       - hostname: qbittorrent
         IP: 10
@@ -120,10 +122,10 @@ spec:
             port: 50413
           - type: udp
             port: 50413
-    # webhook:
-    #   image:
-    #     repository: ghcr.io/angelnu/gateway-admision-controller
-    #     tag: v3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
+    webhook:
+      image:
+        repository: ghcr.io/angelnu/gateway-admision-controller
+        tag: v3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
     #   gatewayDefault: false
     #   gatewayLabel: setGateway
     #   gatewayAnnotation: setGateway
