@@ -5,7 +5,7 @@ metadata:
   name: &app download-gateway
   namespace: flux-system
 spec:
-  targetNamespace: download-gateway
+  targetNamespace: download
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
