@@ -14,6 +14,9 @@ spec:
         name: angelnu
         namespace: flux-system
       interval: 5m
+  dependsOn:
+    - name: nginx
+      namespace: networking
   values:
     image:
       repository: ghcr.io/angelnu/pod-gateway
@@ -23,11 +26,12 @@ spec:
       - download
     settings:
       VXLAN_IP_NETWORK: ${DOWNLOAD_GATEWAY_VPN_VXLAN}
+      VXLAN_ID: 43
       VPN_INTERFACE: tun0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_TRAFFIC_PORT: "1194"
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "${CLUSTER_CIDR} ${SERVICE_CIDR}"
-      VPN_LOCAL_CIDRS: "${DOWNLOAD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR}"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
+      VPN_LOCAL_CIDRS: "${DOWNLOAD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
@@ -64,3 +68,7 @@ spec:
             - to:
                 - ipBlock:
                     cidr: ${SERVICE_CIDR}
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN 
