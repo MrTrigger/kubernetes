@@ -5,16 +5,16 @@ metadata:
   name: &app download-gateway
   namespace: flux-system
 spec:
-  targetNamespace: download
+  targetNamespace: vpn
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/download/download-gateway/app
+  path: ./kubernetes/apps/vpn/download-gateway/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
+  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 5m
