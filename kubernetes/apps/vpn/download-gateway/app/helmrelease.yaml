@@ -14,9 +14,6 @@ spec:
         name: angelnu
         namespace: flux-system
       interval: 5m
-  dependsOn:
-    - name: nginx-internal
-      namespace: networking
   values:
     image:
       repository: ghcr.io/angelnu/pod-gateway
