@@ -43,11 +43,11 @@ spec:
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__APPLICATION_URL: "https://sonarr.bjw-s.dev"
               SONARR__LOG_LEVEL: info
-              # SONARR__API_KEY:
-              #   valueFrom:
-              #     secretKeyRef:
-              #       name: sonarr-secret
-              #       key: api_key
+              SONARR__API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarr-secret
+                    key: api_key
             resources:
               requests:
                 cpu: 20m
@@ -64,7 +64,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "internal-nginx"
+        className: internal
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
@@ -76,10 +76,13 @@ spec:
           - hosts:
               - *host
 
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 100Mi
+        storageClass: tank-nfs
     persistence:
-      config:
-        enabled: true
-        existingClaim: "${VOLSYNC_CLAIM}"
       media:
         enabled: true
         type: nfs
