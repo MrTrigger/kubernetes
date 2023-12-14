@@ -67,9 +67,6 @@ spec:
           - hosts:
               - *host
     persistence:
-      config:
-        enabled: true
-        existingClaim: qbittorrent-config-pvc
       media:
         enabled: true
         type: nfs
@@ -84,3 +81,12 @@ spec:
         path: /tank/storage
         globalMounts:
           - path: /storage
+      # incomplete:
+      #   enabled: true
+      #   type: emptyDir
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 100Mi
+        storageClass: tank-nfs
