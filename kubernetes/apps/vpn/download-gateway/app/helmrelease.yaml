@@ -21,17 +21,18 @@ spec:
     image:
       repository: ghcr.io/angelnu/pod-gateway
       tag: v1.10.0
-    DNS: ${DOWNLOAD_GATEWAY_VPN_VXLAN}.1
+    #DNS: ${DOWNLOAD_GATEWAY_VPN_VXLAN}.1
     routed_namespaces:
       - download
     settings:
-      VXLAN_IP_NETWORK: ${DOWNLOAD_GATEWAY_VPN_VXLAN}
-      VXLAN_ID: 43
+      #VXLAN_IP_NETWORK: ${DOWNLOAD_GATEWAY_VPN_VXLAN}
+      #VXLAN_ID: 43
       VPN_INTERFACE: tun0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_TRAFFIC_PORT: "1194"
       NOT_ROUTED_TO_GATEWAY_CIDRS: "${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
-      VPN_LOCAL_CIDRS: "${DOWNLOAD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
+      #VPN_LOCAL_CIDRS: "${DOWNLOAD_GATEWAY_VPN_VXLAN}.0/24 ${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
+      VPN_LOCAL_CIDRS: "${CLUSTER_CIDR} ${SERVICE_CIDR} ${NODE_CIDR}"
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
