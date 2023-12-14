@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
       interval: 5m
   dependsOn:
-    - name: nginx
+    - name: nginx-internal
       namespace: networking
   values:
     image:
