@@ -54,9 +54,7 @@ spec:
               RADARR__LOG_LEVEL: info
               RADARR__THEME: dark
               TZ: ${TIMEZONE}
-            envFrom:
-              - secretRef:
-                  name: radarr-secret
+            envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
@@ -100,7 +98,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: &host "radarr.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
