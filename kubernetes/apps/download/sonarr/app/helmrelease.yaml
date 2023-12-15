@@ -44,10 +44,9 @@ spec:
               SONARR__APPLICATION_URL: "https://sonarr.bjw-s.dev"
               SONARR__LOG_LEVEL: info
               SONARR__API_KEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-secret
-                    key: api_key
+            envFrom:
+              - secretRef:
+                  name: sonarr-secret
             resources:
               requests:
                 cpu: 20m
