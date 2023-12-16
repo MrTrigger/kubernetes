@@ -112,7 +112,7 @@ spec:
 
     volumeClaimTemplates:
       - name: config
-        mountPath: /config
+        mountPath: /kubernetes/config
         accessMode: ReadWriteOnce
         size: 100Mi
         storageClass: tank-nfs
@@ -120,7 +120,7 @@ spec:
       media:
         enabled: true
         type: nfs
-        server: 192.168.1.50
+        server: "nas.${SECRET_DOMAIN}"
         path: /tank/media
         globalMounts:
           - path: /media
