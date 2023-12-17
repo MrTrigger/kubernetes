@@ -25,11 +25,20 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/onedr0p/qbittorrent
-      tag: 4.6.2@sha256:fedb62126c82ae0c7192e9052633411294a27e9c233613c03b0a8d168d160040
+    controllers:
+      main:
+        pod:
+          securityContext:
+            runAsUser: serveradmin
+            runAsGroup: 1002
+            fsGroup: 1002
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [100]
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 4.6.2@sha256:fedb62126c82ae0c7192e9052633411294a27e9c233613c03b0a8d168d160040
     env:
       TZ: ${TIMEZONE}
       QBITTORRENT__PORT: &port 80
