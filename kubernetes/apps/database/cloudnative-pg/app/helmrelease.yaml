@@ -27,6 +27,9 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
+  envFrom:
+  - secretRef:
+      name: cloudnative-pg-secret
   values:
     crds:
       create: true
