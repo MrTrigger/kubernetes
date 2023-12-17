@@ -25,7 +25,7 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
     DNS: 172.16.1.1
-    routed_namespaces: ["downloads"]
+    routed_namespaces: ["download"]
     settings:
       VXLAN_IP_NETWORK: "172.16.1"
       VXLAN_ID: 43
