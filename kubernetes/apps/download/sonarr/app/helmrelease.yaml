@@ -120,7 +120,7 @@ spec:
       media:
         enabled: true
         type: nfs
-        server: "nas.${SECRET_DOMAIN}"
+        server: "192.168.1.50"
         path: /tank/media
         globalMounts:
           - path: /media
