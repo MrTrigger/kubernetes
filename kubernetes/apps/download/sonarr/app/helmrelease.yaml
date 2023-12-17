@@ -37,12 +37,12 @@ spec:
               tag: 16
             envFrom: &envFrom
               - secretRef:
-                  name: sonarr-secret
+                  name: sonarr-secrets
         containers:
           main:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
-              tag: 4.0.0.734@sha256:e4506ae2e3f787daeeac3219b726618cfc41f5011a8f69d1323349f22a363f0e
+              tag: 4.0.0.737@sha256:b87e975273270c62adff5df680d8d2159c0a9fe49466aabee30546685efd0ac8
             env:
               # https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518
               # https://github.com/dotnet/runtime/issues/9336
@@ -54,15 +54,9 @@ spec:
               SONARR__PORT: &port 80
               SONARR__LOG_LEVEL: info
               SONARR__THEME: dark
-              TZ: ${TIMEZONE}
-              SONARR__API_KEY: ""
               SONARR__POSTGRES_MAIN_DB: sonarr_main
               SONARR__POSTGRES_LOG_DB: sonarr_log
-              INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
-              INIT_POSTGRES_HOST: ${SONARR__POSTGRES_HOST}
-              INIT_POSTGRES_USER: ${SONARR__POSTGRES_USER}
-              INIT_POSTGRES_PASS: ${SONARR__POSTGRES_PASSWORD}
-              INIT_POSTGRES_SUPER_PASS: ${SONARR__POSTGRES_PASSWORD}
+              TZ: ${TIMEZONE}
             envFrom: *envFrom
             probes:
               liveness: &probes
