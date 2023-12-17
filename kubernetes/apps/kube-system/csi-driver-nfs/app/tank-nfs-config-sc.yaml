@@ -2,13 +2,14 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: tank-nfs
+  name: tank-nfs-config-sc
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: "192.168.1.50"
-  share: /tank
-  readOnly: "false"
+  server: 192.168.1.50
+  share: /tank/kubernetes/config
 reclaimPolicy: Delete
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
-mountOptions: ["hard", "noatime"]
+mountOptions:
+  - nfsvers=4.2
+  - hard

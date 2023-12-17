@@ -93,9 +93,7 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /kubernetes/config
-        accessMode: ReadWriteOnce
-        size: 100Mi
-        storageClass: tank-nfs
+    volumes:
+    - name: config-nfs
+      persistentVolumeClaim:
+        claimName: qbittorrent-config-pvc
