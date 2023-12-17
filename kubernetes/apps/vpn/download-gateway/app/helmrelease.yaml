@@ -81,7 +81,5 @@ spec:
             - to:
                 - namespaceSelector: {}
         securityContext:
-          runAsUser: "nobody"
-          fsGroup: "nogroup"
           capabilities:
             add: ["NET_ADMIN"]
