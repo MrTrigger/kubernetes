@@ -7,6 +7,8 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: "192.168.1.50"
   share: /tank
+  readOnly: "false"
 reclaimPolicy: Delete
+allowVolumeExpansion: true
 volumeBindingMode: Immediate
 mountOptions: ["hard", "noatime"]
