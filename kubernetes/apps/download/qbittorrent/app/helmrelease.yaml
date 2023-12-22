@@ -64,7 +64,9 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations:
+          # ingressclass.kubernetes.io/is-default-class: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: cloud-download
           hajimari.io/info: Torrent Downloader
