@@ -84,12 +84,11 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
+
     podSecurityContext:
       runAsUser: serveradmin
       runAsGroup: 1002
       fsGroup: 1002
-      supplementalGroups:
-      - 65536
 
     resources:
       requests:
