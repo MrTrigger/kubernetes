@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: qbittorrent
 spec:
-  interval: 5m
+  interval: 20m
   chart:
     spec:
       chart: app-template
@@ -43,23 +43,23 @@ spec:
 
     env:
       TZ: ${TIMEZONE}
-      QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__BT_PORT: &port-bt 18289
+      QBITTORRENT__PORT: &port 80
+      # QBITTORRENT__BT_PORT: &port-bt 18289
 
     service:
       main:
         ports:
           http:
             port: *port
-      bittorrent:
-        enabled: true
-        type: ClusterIP
-        ports:
-          bittorrent:
-            enabled: true
-            port: *port-bt
-            protocol: TCP
-            targetPort: *port-bt
+      # bittorrent:
+      #   enabled: true
+      #   type: ClusterIP
+      #   ports:
+      #     bittorrent:
+      #       enabled: true
+      #       port: *port-bt
+      #       protocol: TCP
+      #       targetPort: *port-bt
 
     ingress:
       main:
