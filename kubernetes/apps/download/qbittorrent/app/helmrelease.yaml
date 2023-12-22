@@ -28,7 +28,7 @@ spec:
       main:
         pod:
           securityContext:
-            runAsUser: "serveradmin"
+            runAsUser: 1001
             runAsGroup: 1002
             fsGroup: 1002
             fsGroupChangePolicy: OnRootMismatch
