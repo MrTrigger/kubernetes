@@ -30,9 +30,10 @@ spec:
           securityContext:
             runAsUser: 1001
             runAsGroup: 1002
+            runAsNonRoot: true
             fsGroup: 1002
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [100]
+            supplementalGroups: [10000]
         containers:
           main:
             image:
