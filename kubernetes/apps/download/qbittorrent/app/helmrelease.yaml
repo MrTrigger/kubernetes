@@ -28,7 +28,7 @@ spec:
       main:
         pod:
           securityContext:
-            runAsUser: serveradmin
+            runAsUser: "serveradmin"
             runAsGroup: 1002
             fsGroup: 1002
             fsGroupChangePolicy: OnRootMismatch
@@ -118,11 +118,6 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
-
-    podSecurityContext:
-      runAsUser: serveradmin
-      runAsGroup: 1002
-      fsGroup: 1002
 
     resources:
       requests:
